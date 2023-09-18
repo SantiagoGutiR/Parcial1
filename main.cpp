@@ -5,6 +5,8 @@ using namespace std;
 void verificiacion(int **arreglo);
 void patron_usuario(int **arreglo);
 void mostrar_matriz(int **arreglo);
+void patron_1(int **arreglo);
+void patron_3(int **arreglo);
 
 int main()
 {
@@ -15,36 +17,49 @@ int main()
             arreglo[i][j] = 0;
         }
     }
-    mostrar_matriz(arreglo);
-    verificiacion(arreglo);
-    patron_usuario(arreglo);
-    mostrar_matriz(arreglo);
-
-
+    for (short n = 0 ; n < 8 ; n++){
+        delete []arreglo[n];
+    }
+    delete []arreglo;
     return 0;
 }
 
-void mostrar_matriz(int **arreglo){
-    for (short i = 7; i >= 0 ; i--){
-        for ( short j = 7 ; j >= 0 ; j--){
-            if (arreglo[i][j] == 1){
-                cout << "+" ;// Pin 1 en HIGH
+void mostrar_matriz(int **arreglo){ //v_repetir
+    //for (short repeticiones = 1; repeticiones <0 v_repetir ; repeticiones ++){
+        for (short i = 7; i >= 0 ; i--){
+            for ( short j = 7 ; j >= 0 ; j--){
+                if (arreglo[i][j] == 1){
+                    cout << "+" ;// Pin 1 en HIGH
+                }
+                else{                                   //Escribo patron
+                    cout << " "; // Pin 1 en LOW8
+                }
+                //El pin 2 ponerlo en HIGH
+                //Delay(200)
+                //El pin 2 ponerlo en LOW
             }
-            else{
-                cout << " "; // Pin 1 en LOW
-            }
-            //El pin 2 ponerlo en HIGH
-            //Delay(200)
-            //El pin 2 ponerlo en LOW
+            cout << endl; //Referencia de que pasa al siguiente integrado 74HC595
         }
-        cout << endl; //Pasa al siguiente integrado
-    }
-    // Mostrar en al matriz
-    /*for (veces_repetidas = 0 ; veces_repetidas  ; veces_repetidas ++){
-    Pin 3 en HIGH
-    Delay(200)
-    Pin 3 en LOW
-    }*/
+        // Mostrar en al matriz
+        /*Pin 3 en HIGH
+        Delay(500)
+        Pin 3 en LOW
+        */
+        for (short i = 7; i >= 0 ; i--){
+            for ( short j = 7 ; j >= 0 ; j--){
+                cout << " "; // Pin 1 en LOW8
+                //El pin 2 ponerlo en HIGH              //Apago
+                //Delay(200)
+                //El pin 2 ponerlo en LOW
+            }
+            cout << endl; //Referencia de que pasa al siguiente integrado 74HC595
+        }
+        // Mostrar en al matriz
+        /*Pin 3 en HIGH
+        Delay(500)
+        Pin 3 en LOW
+        */
+    //}
 }
 void verificiacion(int **arreglo){
     for ( short i = 0 ; i < 8 ; i++){
@@ -60,12 +75,54 @@ void patron_usuario(int **arreglo){
     cout << "Ingrese el estado de cada led...";
     cout << "Ingrese 1 si desea prender el led..." << endl;
     cout << "Ingrese 0 si desea el led apagado..." << endl;
-    for(short i = 0; i < 8 ; i++){
+    for(short i = 0; i < 8  ; i++){
         for( short j = 0; j < 8 ; j++){
             cout << "Ingrese el estado del led: ";
             cin >> x;
             arreglo[i][j] = x;
         }
     }
-    //return arreglo;
+}
+
+void patron_1(int **arreglo){
+    for ( short i = 0 ; i <= 3 ; i++){
+        for ( short j = 0 ; j < 8 ; j++){
+            if ( (3-i) <= j && j <= (4+i)){
+                    arreglo[i][j] = 1;
+            }
+            else{
+                    arreglo[i][j] = 0;
+            }
+        }
+    }
+    for ( short i = 4 ; i < 8 ; i++){
+        for ( short j = 0 ; j < 8 ; j++){
+            if ( (i - 4) <= j && j <= (11 - i)){
+                    arreglo[i][j] = 1;
+            }
+            else{
+                    arreglo[i][j] = 0;
+            }
+        }
+    }
+}
+
+void patron_3(int **arreglo){
+    for ( short i = 0 ; i < 8 ; i++){
+        for ( short j = 0 ; j < 8 ; j++){
+            if ( i == 0 || i == 1 || i == 4 || i == 5 ){
+                    if ( j == 2 || j == 5 ){
+                        arreglo[i][j] = 0;
+                    }
+            }
+            else if ( i == 2 || i == 3 || i == 6 || i == 7 ){
+                    if ( j == 0 || j == 3 || j == 6 ){
+                        arreglo[i][j] = 0;
+                    }
+            }
+            else{
+                    arreglo[i][j] = 1;
+            }
+        }
+    }
 }

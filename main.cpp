@@ -4,19 +4,26 @@ using namespace std;
 
 void verificiacion(int **arreglo);
 void patron_usuario(int **arreglo);
-void mostrar_matriz(int **arreglo);
+void mostrar_matriz(int **arreglo);//, int v_repetir ,int tiempo);
 void patron_1(int **arreglo);
 void patron_3(int **arreglo);
+void patron_2(int **arreglo);
 
 int main()
 {
-    int **arreglo = new int*[8];
+    int **arreglo;
+    arreglo = new int*[8];
     for ( short i = 0 ; i < 8 ; i++){
         arreglo[i] = new int[8];
         for ( short j = 0 ; j < 8 ; j++){
-            arreglo[i][j] = 0;
+            arreglo[i][j] = 1;
         }
     }
+
+    mostrar_matriz(arreglo);
+    patron_2(arreglo);
+    mostrar_matriz(arreglo);
+
     for (short n = 0 ; n < 8 ; n++){
         delete []arreglo[n];
     }
@@ -24,15 +31,15 @@ int main()
     return 0;
 }
 
-void mostrar_matriz(int **arreglo){ //v_repetir
-    //for (short repeticiones = 1; repeticiones <0 v_repetir ; repeticiones ++){
+void mostrar_matriz(int **arreglo){//,int v_repetir ,int tiempo){
+    //for (short repeticiones = 1; repeticiones <= v_repetir ; repeticiones ++){
         for (short i = 7; i >= 0 ; i--){
             for ( short j = 7 ; j >= 0 ; j--){
                 if (arreglo[i][j] == 1){
                     cout << "+" ;// Pin 1 en HIGH
                 }
                 else{                                   //Escribo patron
-                    cout << " "; // Pin 1 en LOW8
+                    cout << " "; // Pin 1 en LOW
                 }
                 //El pin 2 ponerlo en HIGH
                 //Delay(200)
@@ -42,12 +49,12 @@ void mostrar_matriz(int **arreglo){ //v_repetir
         }
         // Mostrar en al matriz
         /*Pin 3 en HIGH
-        Delay(500)
+        Delay(tiempo*1000)
         Pin 3 en LOW
         */
         for (short i = 7; i >= 0 ; i--){
             for ( short j = 7 ; j >= 0 ; j--){
-                cout << " "; // Pin 1 en LOW8
+                cout << " "; // Pin 1 en LOW
                 //El pin 2 ponerlo en HIGH              //Apago
                 //Delay(200)
                 //El pin 2 ponerlo en LOW
@@ -56,7 +63,7 @@ void mostrar_matriz(int **arreglo){ //v_repetir
         }
         // Mostrar en al matriz
         /*Pin 3 en HIGH
-        Delay(500)
+        Delay(tiempo*1000)
         Pin 3 en LOW
         */
     //}
@@ -67,7 +74,6 @@ void verificiacion(int **arreglo){
             arreglo[i][j] = 1;
         }
     }
-    mostrar_matriz(arreglo);
 }
 
 void patron_usuario(int **arreglo){
@@ -124,5 +130,21 @@ void patron_3(int **arreglo){
                     arreglo[i][j] = 1;
             }
         }
+    }
+}
+
+void patron_2(int **arreglo){
+    short constante = 7;
+    for ( short i = 0 ; i < 8 ; i++){
+        for ( short j = 0 ; j < 8 ; j++){
+            if ( i == j){
+                arreglo[i][j] = 1;
+            }
+            else{
+                arreglo[i][j] = 0;
+            }
+        }
+        arreglo[i][constante] = 1;
+        constante --;
     }
 }

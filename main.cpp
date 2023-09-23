@@ -8,6 +8,7 @@ void mostrar_matriz(int **arreglo);//, int v_repetir ,int tiempo);
 void patron_1(int **arreglo);
 void patron_3(int **arreglo);
 void patron_2(int **arreglo);
+void patron_4(int **arreglo);
 
 int main()
 {
@@ -20,8 +21,8 @@ int main()
         }
     }
 
-    mostrar_matriz(arreglo);
-    patron_2(arreglo);
+    patron_3(arreglo);
+    patron_4(arreglo);
     mostrar_matriz(arreglo);
 
     for (short n = 0 ; n < 8 ; n++){
@@ -147,4 +148,47 @@ void patron_2(int **arreglo){
         arreglo[i][constante] = 1;
         constante --;
     }
+}
+
+void patron_4(int **arreglo){
+    short constante = 0;
+    short contador = 1;
+    short x = 0;
+    for ( short i = 0 ; i < 4 ; i++){
+        for ( short j = 0 ; j < 8 ; j++){
+            if ( j == constante){
+                x = 1;
+            }
+            if (x == 1 && contador < 5){
+                arreglo[i][j] = x;
+                contador ++;
+            }
+            else{
+                x = 0;
+                arreglo[i][j] = x;
+            }
+        }
+        contador = 1;
+        constante ++;
+    }
+    constante = 3;
+    contador = 1;
+    for ( short i = 4 ; i < 8 ; i++){
+        for ( short j = 0 ; j < 8 ; j++){
+            if ( j == constante){
+                x = 1;
+            }
+            if (x == 1 && contador < 5){
+                arreglo[i][j] = x;
+                contador ++;
+            }
+            else{
+                x = 0;
+                arreglo[i][j] = x;
+            }
+        }
+        contador = 1;
+        constante --;
+    }
+
 }
